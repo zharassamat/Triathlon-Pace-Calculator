@@ -3,11 +3,9 @@ package sj.alashalemi.triathlonpacecalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -19,8 +17,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import sj.alashalemi.triathlonpacecalculator.ui.*
+import sj.alashalemi.triathlonpacecalculator.ui.BottomNavItem
+import sj.alashalemi.triathlonpacecalculator.ui.screens.bike.BikeScreen
+import sj.alashalemi.triathlonpacecalculator.ui.screens.run.RunScreen
+import sj.alashalemi.triathlonpacecalculator.ui.screens.settings.SettingsScreen
+import sj.alashalemi.triathlonpacecalculator.ui.screens.swim.SwimScreen
 import sj.alashalemi.triathlonpacecalculator.ui.theme.TriathlonPaceCalculatorTheme
+import sj.alashalemi.triathlonpacecalculator.ui.screens.triathlon.TriathlonScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +38,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
-        composable(BottomNavItem.Home.screen_route) {
-            HomeScreen()
+    NavHost(navController, startDestination = BottomNavItem.Run.screen_route) {
+        composable(BottomNavItem.Run.screen_route) {
+            RunScreen()
         }
-        composable(BottomNavItem.MyNetwork.screen_route) {
-            NetworkScreen()
+        composable(BottomNavItem.Swim.screen_route) {
+            SwimScreen()
         }
-        composable(BottomNavItem.AddPost.screen_route) {
-            AddPostScreen()
+        composable(BottomNavItem.Bike.screen_route) {
+            BikeScreen()
         }
-        composable(BottomNavItem.Notification.screen_route) {
-            NotificationScreen()
+        composable(BottomNavItem.Triathlon.screen_route) {
+            TriathlonScreen()
         }
-        composable(BottomNavItem.Jobs.screen_route) {
-            JobScreen()
+        composable(BottomNavItem.Settings.screen_route) {
+            SettingsScreen()
         }
     }
 }
@@ -57,11 +60,11 @@ fun NavigationGraph(navController: NavHostController) {
 @Composable
 fun BottomNavigation(navController: NavController) {
     val items = listOf(
-        BottomNavItem.Home,
-        BottomNavItem.MyNetwork,
-        BottomNavItem.AddPost,
-        BottomNavItem.Notification,
-        BottomNavItem.Jobs
+        BottomNavItem.Run,
+        BottomNavItem.Swim,
+        BottomNavItem.Bike,
+        BottomNavItem.Triathlon,
+        BottomNavItem.Settings
     )
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.teal_200),
